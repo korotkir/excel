@@ -1,0 +1,15 @@
+Webpack (imports/exports)
+    - Babel
+    - Scss
+    - Eslint
+    - 2 Modes
+        - Development
+            - Dev Server (autoreload),
+            - SourceMaps (для дебага кода),
+            - Eslint (инструмент для поддержки чистоты кода),
+            - Not Minified JS & CSS
+        - Production
+            - Minified code
+Git
+ - Production
+ - Development
