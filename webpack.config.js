@@ -28,6 +28,7 @@ module.exports = {
     },
     devtool: isDev ? 'source-map' : false,
     devServer: {
+        contentBase: path.join(__dirname, 'dist'),
         port: 3000,
         hot: isDev
     },
@@ -71,5 +72,8 @@ module.exports = {
                 }
             }
         ],
-    }
+
+    },
+    target: process.env.NODE_ENV === "development" ? "web" : "browserslist"
 }
+
