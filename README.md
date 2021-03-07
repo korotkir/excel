@@ -7,3 +7,5 @@ npm run build - prod start </br>
 git branch </br>
 git checkout -u branch </br>
 git push -u origin branch </br>
+</br>
+git clone repo -b branch-name
