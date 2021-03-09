@@ -1,5 +1,6 @@
 export class Excel {
   constructor(selector, options) {
+    // В нашем случае, $el = #app
     this.$el = document.querySelector(selector)
     this.components = options.components || []
   }
@@ -14,6 +15,9 @@ export class Excel {
   }
 
   render() {
+    // Метод append позволяет вставить в конец какого-либо другой элемент.
     this.$el.append(this.getRoot())
   }
 }
+
+
