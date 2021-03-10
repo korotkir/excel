@@ -1,10 +1,46 @@
 class Dom {
+  constructor(selector) {
+    // #app
+    // если тип "selector" - строка, тогда "document.querySelector(selector)"
+    // иначе "selector"
+    this.$el = typeof selector === 'string'
+      ? document.querySelector(selector)
+      : selector
+  }
+  // Данный метод используется вместо innerHTML
+  html(html) {
+    if (typeof html === 'string') {
+      this.$el.innerHTML = html
+      return this
+    }
+    // trim обрезает пробелы слева и справа
+    return this.$el.outerHTML.trim()
+  }
+
+  // Данный метод очищает контент класса
+  clear() {
+    this.html('')
+    return this
+  }
+
+  append(node) {
+    if (node instanceof Dom) {
+      node = node.$el
+    }
+    if (Element.prototype.append) {
+      this.$el.append(node)
+    } else {
+      this.$el.appendChild(node)
+    }
+    return this
+  }
 }
 
+$('div').html(`<h1>Test</h1>`).clear()
 
 // Функция $ отвечает за взаимодействие с DOM-элементами
-export function $() {
-  return new Dom()
+export function $(selector) {
+  return new Dom(selector)
 }
 
 /* С помощью данной функции мы упростим взаимодействие с созданием классов.
@@ -19,5 +55,5 @@ $.create = (tagName, classes = '') => {
   if (classes) {
     el.classList.add(classes)
   }
-  return el
+  return $(el)
 }
