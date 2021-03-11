@@ -22,6 +22,10 @@ export class Excel {
   render() {
     // Метод append позволяет вставить в конец какого-либо другой элемент.
     this.$el.append(this.getRoot())
+    // Вызывает каждому элементу массива component (index.js)
+    // метод init()(initDOMListeners()).
+    // Соответственно, вешает слушатели на те компоненты,
+    // в которых присутствует listeners.
     this.components.forEach(component => component.init())
   }
 }

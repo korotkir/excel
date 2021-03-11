@@ -16,11 +16,14 @@ export class Formula extends ExcelComponents {
   }
 
   onInput() {
+    // Отдает название элемента
     console.log(this.$root)
+    // Отдает введенные символы
     console.log('Formula: onInput', event.target.textContent.trim())
   }
 
   onClick() {
-    console.log('test')
+    // При клике на формулу выводит 'click'
+    console.log('click')
   }
 }

@@ -23,6 +23,7 @@ class Dom {
     return this
   }
 
+  // Данный метод вешает addEventListener()
   on(eventType, callback) {
     this.$el.addEventListener(eventType, callback)
   }

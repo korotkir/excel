@@ -1,4 +1,5 @@
 // Pure functions
+// Функция делает заглавной первую букву строки.
 export function capitalize(string) {
   if (typeof string !== 'string') {
     return ''

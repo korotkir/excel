@@ -9,6 +9,8 @@ export class DomListener {
     this.listeners = listeners
   }
 
+  // Данная функция вешает событие на listener.
+  // Если элемент listener не определен - отдает ошибку.
   initDOMListeners() {
     // console.log(this.listeners, this.$root)
     this.listeners.forEach(listener => {
@@ -16,6 +18,7 @@ export class DomListener {
       if (!this[method]) {
         const name = this.name || ''
         throw new Error(
+            // Метод $ {method} не реализован в компоненте ${name}
             `Method ${method} is not implemented in ${name} Component`)
       }
       // Тоже самое что и addEventListener
@@ -28,9 +31,11 @@ export class DomListener {
   }
 }
 
-// Пишем приватную функцию специально для этого модуля
+// Пишем приватную функцию специально для этого модуля.
+// Добавляет 'on' к элементу массива.
+// input => onInput
 function getMethodName(eventName) {
   return 'on' + capitalize(eventName)
 }
 
-// input => onInput
+
