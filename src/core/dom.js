@@ -28,6 +28,11 @@ class Dom {
     this.$el.addEventListener(eventType, callback)
   }
 
+  // Данный метод удаляет addEventListener()
+  off(eventType, callback) {
+    this.$el.removeEventListener(eventType, callback)
+  }
+
   append(node) {
     if (node instanceof Dom) {
       node = node.$el
