@@ -44,9 +44,16 @@ class Dom {
     }
     return this
   }
-}
 
-$('div').html(`<h1>Test</h1>`).clear()
+  closest(selector) {
+    return $(this.$el.closest(selector))
+  }
+
+  // Метод для получения координат
+  getCoords() {
+    return this.$el.getBoundingClientRect()
+  }
+}
 
 // Функция $ отвечает за взаимодействие с DOM-элементами
 export function $(selector) {
