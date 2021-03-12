@@ -45,6 +45,12 @@ class Dom {
     return this
   }
 
+  // Метод позволяющий быстро дойти до data атрибутов
+  // Getter
+  get data() {
+    return this.$el.dataset
+  }
+
   closest(selector) {
     return $(this.$el.closest(selector))
   }
@@ -52,6 +58,10 @@ class Dom {
   // Метод для получения координат
   getCoords() {
     return this.$el.getBoundingClientRect()
+  }
+
+  findAll(selector) {
+    return this.$el.querySelectorAll(selector)
   }
 }
 

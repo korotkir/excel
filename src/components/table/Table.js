@@ -21,12 +21,14 @@ export class Table extends ExcelComponents {
       // const $parent = $resizer.$el.parentNode  // bad!
       const $parent = $resizer.closest('[data-type="resizable"]')
       const coords = $parent.getCoords()
+      const cells = this.$root.findAll(`[data-col="${$parent.data.col}"]`)
 
       document.onmousemove = e => {
         // Получаем расстояния от исходного края до сдвига в px
         const delta = e.pageX - coords.right
         const value = coords.width + delta
         $parent.$el.style.width = value + 'px'
+        cells.forEach(el => el.style.width = value + 'px')
       }
 
       document.onmouseup = () => {
