@@ -44,9 +44,34 @@ class Dom {
     }
     return this
   }
-}
 
-$('div').html(`<h1>Test</h1>`).clear()
+  // Метод позволяющий быстро дойти до data атрибутов
+  // Getter
+  get data() {
+    return this.$el.dataset
+  }
+
+  closest(selector) {
+    return $(this.$el.closest(selector))
+  }
+
+  // Метод для получения координат
+  getCoords() {
+    return this.$el.getBoundingClientRect()
+  }
+
+  findAll(selector) {
+    return this.$el.querySelectorAll(selector)
+  }
+
+  css(styles = {}) {
+    Object
+        .keys(styles)
+        .forEach(key => {
+          this.$el.style[key] = styles[key]
+        })
+  }
+}
 
 // Функция $ отвечает за взаимодействие с DOM-элементами
 export function $(selector) {
