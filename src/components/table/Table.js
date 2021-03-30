@@ -14,9 +14,11 @@ import {TableSelection} from '@/components/table/TableSelection'
 export class Table extends ExcelComponents {
   static className = 'excel__table'
 
-  constructor($root) {
+  constructor($root, options) {
     super($root, {
-      listeners: ['mousedown', 'keydown']
+      name: 'Table',
+      listeners: ['mousedown', 'keydown'],
+      ...options
     })
   }
 
@@ -30,13 +32,40 @@ export class Table extends ExcelComponents {
 
   init() {
     super.init()
-    const $cell = this.$root.find('[data-id="0:0"]')
+
+    this.selectCell(this.$root.find('[data-id="0:0"]'))
+
+    this.$on('formula:input', text => {
+      this.selection.current.text(text)
+    })
+
+    this.$on('formula:done', () => {
+      this.selection.current.focus()
+    })
+
+    this.$subscribe(state => {
+      console.log('TableState', state)
+    })
+  }
+
+  selectCell($cell) {
     this.selection.select($cell)
+    this.$emit('table:select', $cell)
+  }
+
+  async resizeTable(event) {
+    try {
+      const data = await resizeHandler(this.$root, event)
+      this.$dispatch(({type: 'TABLE_RESIZE', data}))
+      console.log('Resize data', data)
+    } catch (e) {
+      console.warn('Resize error', e.message)
+    }
   }
 
   onMousedown(event) {
     if (shouldResize(event)) {
-      resizeHandler(this.$root, event)
+      this.resizeTable(event)
     } else if (isCell(event)) {
       const $target = $(event.target)
       if (event.shiftKey) {
@@ -44,7 +73,7 @@ export class Table extends ExcelComponents {
             .map(id => this.$root.find(`[data-id="${id}"]`))
         this.selection.selectGroup($cells)
       } else {
-        this.selection.select($target)
+        this.selectCell($target)
       }
     }
   }
