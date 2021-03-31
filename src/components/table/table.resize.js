@@ -17,7 +17,6 @@ export function resizeHandler($root, event) {
     })
 
     document.onmousemove = e => {
-      console.log('mousemove')
       if (type === 'col') {
         // Получаем расстояния от исходного края до сдвига в px
         const delta = e.pageX - coords.right

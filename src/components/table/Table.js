@@ -9,7 +9,7 @@ import {
   shouldResize
 } from '@/components/table/table.function'
 import {TableSelection} from '@/components/table/TableSelection'
-
+import * as actions from '@/redux/actions'
 
 export class Table extends ExcelComponents {
   static className = 'excel__table'
@@ -23,7 +23,7 @@ export class Table extends ExcelComponents {
   }
 
   toHTML() {
-    return createTable(20)
+    return createTable(20, this.store.getState())
   }
 
   prepare() {
@@ -43,9 +43,9 @@ export class Table extends ExcelComponents {
       this.selection.current.focus()
     })
 
-    this.$subscribe(state => {
-      console.log('TableState', state)
-    })
+    // this.$subscribe(state => {
+    //   console.log('TableState', state)
+    // })
   }
 
   selectCell($cell) {
@@ -56,8 +56,8 @@ export class Table extends ExcelComponents {
   async resizeTable(event) {
     try {
       const data = await resizeHandler(this.$root, event)
-      this.$dispatch(({type: 'TABLE_RESIZE', data}))
-      console.log('Resize data', data)
+      this.$dispatch(actions.tableResize(data))
+      // console.log('Resize data', data)
     } catch (e) {
       console.warn('Resize error', e.message)
     }
