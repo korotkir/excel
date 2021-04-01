@@ -17,7 +17,7 @@ export class Table extends ExcelComponents {
   constructor($root, options) {
     super($root, {
       name: 'Table',
-      listeners: ['mousedown', 'keydown'],
+      listeners: ['input', 'mousedown', 'keydown'],
       ...options
     })
   }
@@ -34,7 +34,6 @@ export class Table extends ExcelComponents {
     super.init()
 
     this.selectCell(this.$root.find('[data-id="0:0"]'))
-
     this.$on('formula:input', text => {
       this.selection.current.text(text)
       this.updateTextInStore(text)
