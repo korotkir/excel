@@ -17,42 +17,45 @@ function toButton(button) {
 }
 
 
-export function createToolbar(state) {
+export function createToolbar(s) {
   const buttons = [
     {
+		    value: {textAlign: 'left'},
       icon: 'format_align_left',
-		    active: false,
-		    value: {textAlign: 'left'}
+		    active: s['textAlign'] === 'left'
     },
     {
-      icon: 'format_align_center',
-		    active: false,
-		    value: {textAlign: 'left'}
+		    value: {textAlign: 'center'},
+		    icon: 'format_align_justify',
+		    active: s['textAlign'] === 'center'
     },
     {
-      icon: 'format_align_right',
-		    active: false,
-		    value: {textAlign: 'right'}
+		    value: {textAlign: 'right'},
+		    icon: 'format_align_right',
+		    active: s['textAlign'] === 'right'
     },
     {
       icon: 'format_bold',
-		    active: state['fontWeight'] === 'bold',
-		    value: {fontWeight: state['fontWeight'] === 'bold' ? 'normal' : 'bold'}
+		    active: s['fontWeight'] === 'bold',
+		    value: {fontWeight: s['fontWeight'] === 'bold'
+					    ? 'normal'
+					    : 'bold'
+      }
     },
     {
       icon: 'format_italic',
-		    active: state['fontStyle'] === 'italic',
-		    value: {fontStyle: state['fontStyle'] === 'italic'
+		    active: s['fontStyle'] === 'italic',
+		    value: {fontStyle: s['fontStyle'] === 'italic'
 					    ? 'normal'
 					    : 'italic'
       }
     },
     {
-      icon: 'format_underlined',
-		    active: state['textDecoration'] === 'underlined',
-		    value: {textDecoration: state['textDecoration'] === 'underlined'
+      icon: 'format_underline',
+		    active: s['textDecoration'] === 'underline',
+		    value: {textDecoration: s['textDecoration'] === 'underline'
 					    ? 'none'
-					    : 'underlined'
+					    : 'underline'
       }
     }
   ]

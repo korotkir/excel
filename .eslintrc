@@ -12,7 +12,8 @@
     "require-jsdoc": "off",
     "operator-linebreak": "off",
     "no-tabs": "off",
-    "no-mixed-spaces-and-tabs": "off"
+    "no-mixed-spaces-and-tabs": "off",
+    "no-trailing-spaces": "off"
   },
   "extends": ["eslint:recommended", "google"]
 }
