@@ -1,5 +1,6 @@
 import {toInlineStyles} from '@core/utils'
 import {defaultStyles} from '@/constans'
+import {parse} from '@core/parse'
 
 const CODES = {
   A: 65,
@@ -33,8 +34,9 @@ function toCell(state, row) {
           data-col="${col}"
           data-type="cell"
           data-id="${id}"
+          data-value="${data || ''}"
           style="${styles}; width: ${width}"
-        >${data || ''}</div>
+        >${parse(data) || ''}</div>
   `
   }
 }
@@ -85,9 +87,7 @@ function withWidthFrom(state) {
 }
 
 export function createTable(rowsCount = 15, state = {}) {
-  console.log(state)
   const colsCount = CODES.Z - CODES.A + 1
-  console.log(colsCount)
   const rows = []
 
   // создаем новый массив, зависимый от количества колонок
@@ -101,7 +101,6 @@ export function createTable(rowsCount = 15, state = {}) {
       .map(toColumn)
       // Соединяем все в строку
       .join('')
-  console.log('state.colState: ', state.colState)
   // В итоге получаем набор колонок
   rows.push(createRow(null, cols, {}))
 
