@@ -12,7 +12,6 @@ export class DomListener {
   // Данная функция вешает событие на listener.
   // Если элемент listener не определен - отдает ошибку.
   initDOMListeners() {
-    // console.log(this.listeners, this.$root)
     this.listeners.forEach(listener => {
       const method = getMethodName(listener)
       if (!this[method]) {
