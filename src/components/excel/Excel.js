@@ -3,9 +3,7 @@ import {Emitter} from '@core/Emitter'
 import {StoreSubscriber} from '@core/StoreSubscriber'
 
 export class Excel {
-  constructor(selector, options) {
-    // В нашем случае, $el = #app
-    this.$el = $(selector)
+  constructor(options) {
     this.components = options.components || []
     this.store = options.store
     this.emitter = new Emitter()
@@ -30,9 +28,7 @@ export class Excel {
     return $root
   }
 
-  render() {
-    // Метод append позволяет вставить в конец какого-либо другой элемент.
-    this.$el.append(this.getRoot())
+  init() {
     this.subscriber.subscribeComponents(this.components)
     // Вызывает каждому элементу массива component (index.js)
     // метод init()(initDOMListeners()).
