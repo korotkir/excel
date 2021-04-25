@@ -1,5 +1,6 @@
 import {$} from '../dom'
 import {ActiveRoute} from './ActiveRoute'
+import {Loaders} from '../../components/Loaders';
 
 export class Router {
   constructor(selector, routes) {
@@ -7,13 +8,15 @@ export class Router {
       throw new Error('Selector is not provided in Router')
     }
     this.$placeholder = $(selector)
-		  this.routes = routes
+    this.routes = routes
 
-		  this.page = null
+    this.loaders = new Loaders()
 
-		  this.changePageHandler = this.changePageHandler.bind(this)
+    this.page = null
 
-		  this.init()
+    this.changePageHandler = this.changePageHandler.bind(this)
+
+    this.init()
   }
 
   init() {
@@ -21,11 +24,11 @@ export class Router {
     this.changePageHandler()
   }
 
-  changePageHandler() {
+  async changePageHandler() {
   		if (this.page) {
   				this.page.destroy()
 		  }
-		  this.$placeholder.clear()
+		  this.$placeholder.clear().append(this.loaders)
 
   		const Page = ActiveRoute.path.includes('excel')
 			  ? this.routes.excel
@@ -33,8 +36,9 @@ export class Router {
 
 		  this.page = new Page(ActiveRoute.param)
 
+    	const root = await this.page.getRoot()
 
-		  this.$placeholder.append(this.page.getRoot())
+		  this.$placeholder.clear().append(root)
 
 		  this.page.afterRender()
   }
