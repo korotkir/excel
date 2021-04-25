@@ -44,7 +44,7 @@ function toCell(state, row) {
 function toColumn({col, index, width}) {
   return `
     <div 
-        class="column" 
+        class="column unselectable" 
         data-type="resizable" 
         data-col="${index}" 
         style="width: ${width}"
@@ -60,7 +60,7 @@ function createRow(index, content, state) {
   const height = getHeight(state, index)
   return `
     <div 
-        class="row" 
+        class="row unselectable" 
         data-type="resizable" 
         data-row="${index}"
         style="height: ${height}"    
